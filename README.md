@@ -46,7 +46,7 @@ Here are all the names that have contributed in some way to the development of t
 
 * **Jonatas Laet** - *Documentation and Development* - [jonataslaet](https://github.com/jonataslaet)
 
-You can also see the list of all the [colaborators](https://github.com/jonataslaet/karatedopi/graphs/contributors) who participated in this project.
+You can also see the list of all the [colaborators](https://github.com/jonataslaet/laetdelivery/graphs/contributors) who participated in this project.
 
 
 ---

@@ -10,7 +10,7 @@ The following are the technologies used in building this project:
 * [Java 21](https://www.oracle.com/java/) - Backend programming language
 * [Spring Boot 3.2.0](https://spring.io/projects/spring-boot) - Java-based framework for Spring based Applications
 * [Kafka](https://kafka.apache.org/documentation/) - Distributed event store and stream-processing platform
-* [Red Panda](https://docs.redpanda.com/current/home/) - Apache Kafka®-compatible, streaming data platform
+* [Red Panda v2.3](https://docs.redpanda.com/current/home/) - Apache Kafka®-compatible, streaming data platform
 
 
 ## 🚀 Introduction
@@ -20,7 +20,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### 📋 Prerequisites
 
-Before having the technologies installed, it is crucial to have Docker installed.
+It is crucial to have [Docker](https://docs.docker.com/engine/install/) and [Python](https://kinsta.com/knowledgebase/install-python/) installed on your machine.
 
 
 ### 🔧 Running Containers
@@ -36,9 +36,14 @@ git clone https://github.com/jonataslaet/laetdelivery
 02. Navigate through the command line to the laetdelivery folder and execute the following command:
 
 ```
-docker-compose -p laetdelivery -f docker-compose.yml up -d
+python build.py
 ```
 
+03. Ih the same folder, if you want to turn off the application, just run the following command:
+
+```
+docker-compose -p laetdelivery -f docker-compose.yml down
+```
 
 ## ✒️ Authors
 

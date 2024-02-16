@@ -1,4 +1,4 @@
-package br.com.microservices.orchestrated.orderservice.documents;
+package br.com.microservices.orchestrated.inventoryservice.dtos;
 
 import lombok.*;
 
@@ -9,7 +9,6 @@ import lombok.*;
 @AllArgsConstructor
 public class Product {
 
-    @EqualsAndHashCode.Include
     private String code;
     private Double unitValue;
 

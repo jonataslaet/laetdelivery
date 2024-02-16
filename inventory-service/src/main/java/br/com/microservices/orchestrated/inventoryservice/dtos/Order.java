@@ -1,9 +1,8 @@
-package br.com.microservices.orchestrated.orderservice.documents;
+package br.com.microservices.orchestrated.inventoryservice.dtos;
 
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -16,10 +15,7 @@ public class Order {
 
     @EqualsAndHashCode.Include
     private String id;
-
-    @Builder.Default
-    private List<OrderProducts> products = new ArrayList<>();
-
+    private List<OrderProducts> products;
     private LocalDateTime createdAt;
     private String transactionalId;
     private Double totalAmount;

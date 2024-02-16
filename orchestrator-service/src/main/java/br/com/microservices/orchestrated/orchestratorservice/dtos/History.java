@@ -1,7 +1,7 @@
 package br.com.microservices.orchestrated.orchestratorservice.dtos;
 
-import br.com.microservices.orchestrated.orchestratorservice.EventSourceEnum;
-import br.com.microservices.orchestrated.orchestratorservice.SagaStatus;
+import br.com.microservices.orchestrated.orchestratorservice.enums.EventSourceEnum;
+import br.com.microservices.orchestrated.orchestratorservice.enums.SagaStatusEnum;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class History {
 
     private EventSourceEnum source;
-    private SagaStatus status;
+    private SagaStatusEnum status;
     private String message;
     private LocalDateTime createdAt;
 }

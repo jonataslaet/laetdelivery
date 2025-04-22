@@ -1,6 +1,6 @@
 package br.com.microservices.orchestrated.inventoryservice.dtos;
 
-import br.com.microservices.orchestrated.productvalidationservice.enums.SagaStatusEnum;
+import br.com.microservices.orchestrated.inventoryservice.enums.SagaStatusEnum;
 import lombok.*;
 
 import java.time.LocalDateTime;

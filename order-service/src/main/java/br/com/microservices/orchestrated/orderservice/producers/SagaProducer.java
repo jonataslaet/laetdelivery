@@ -16,12 +16,12 @@ public class SagaProducer {
     @Value("${spring.kafka.topic.start-saga}")
     private String startSagaTopic;
 
-    public void sendEvent(String payload) {
+    public void sendEvent(String eventPayload) {
         try {
-            log.info("Sending event to topic {} with data {}", startSagaTopic, payload);
-            kafkaTemplate.send(startSagaTopic, payload);
+            log.info("Sending event to topic {} with data {}", startSagaTopic, eventPayload);
+            kafkaTemplate.send(startSagaTopic, eventPayload);
         } catch (Exception ex) {
-            log.error("Error trying to send data to topic {} with data {}", startSagaTopic, payload, ex);
+            log.error("Error trying to send data to topic {} with data {}", startSagaTopic, eventPayload, ex);
         }
     }
 }

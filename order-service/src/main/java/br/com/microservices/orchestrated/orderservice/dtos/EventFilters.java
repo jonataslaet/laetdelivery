@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 public class EventFilters {
 
     private String orderId;
-    private String transactionId;
+    private String transactionalId;
 
 }

@@ -4,7 +4,10 @@ import br.com.microservices.orchestrated.productvalidationservice.enums.SagaStat
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+
+import static org.springframework.util.ObjectUtils.isEmpty;
 
 @Getter
 @Setter
@@ -23,4 +26,11 @@ public class Event {
     private SagaStatusEnum status;
     private List<History> eventHistory;
     private LocalDateTime createdAt;
+
+    public void addHistory(History history) {
+        if (isEmpty(eventHistory)) {
+            this.eventHistory = new ArrayList<>();
+        }
+        this.eventHistory.add(history);
+    }
 }

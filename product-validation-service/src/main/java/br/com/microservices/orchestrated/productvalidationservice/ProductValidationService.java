@@ -2,7 +2,7 @@ package br.com.microservices.orchestrated.productvalidationservice;
 
 import br.com.microservices.orchestrated.productvalidationservice.dtos.Event;
 import br.com.microservices.orchestrated.productvalidationservice.dtos.History;
-import br.com.microservices.orchestrated.productvalidationservice.dtos.OrderProducts;
+import br.com.microservices.orchestrated.productvalidationservice.dtos.OrderItem;
 import br.com.microservices.orchestrated.productvalidationservice.entities.Validation;
 import br.com.microservices.orchestrated.productvalidationservice.enums.SagaStatusEnum;
 import br.com.microservices.orchestrated.productvalidationservice.exceptions.ValidationException;
@@ -58,7 +58,7 @@ public class ProductValidationService {
 
     private void changeValidationToFail(Event event) {
         validationRepository
-            .findByOrderIdAndTransactionId(event.getPayload().getId(), event.getTransactionalId())
+            .findByOrderIdAndTransactionId(event.getPayload().getId(), event.getTransactionId())
             .ifPresentOrElse(validation -> {
                 validation.setSuccess(false);
                 validationRepository.save(validation);
@@ -66,10 +66,10 @@ public class ProductValidationService {
     }
 
     private void validateProductsInformed(Event event) {
-        if (isEmpty(event.getPayload()) || isEmpty(event.getPayload().getProducts())) {
+        if (isEmpty(event.getPayload()) || isEmpty(event.getPayload().getOrderItems())) {
             throw new ValidationException("Product list is empty");
         }
-        if (isEmpty(event.getPayload().getId()) || isEmpty(event.getPayload().getTransactionalId())) {
+        if (isEmpty(event.getPayload().getId()) || isEmpty(event.getPayload().getTransactionId())) {
             throw new ValidationException("OrderID and TransactionID must be informed");
         }
     }
@@ -77,16 +77,16 @@ public class ProductValidationService {
     private void checkCurrentValidation(Event event) {
         validateProductsInformed(event);
         if (validationRepository.existsByOrderIdAndTransactionId(
-            event.getOrderId(), event.getTransactionalId())) {
+            event.getOrderId(), event.getTransactionId())) {
             throw new ValidationException("There's another transactionId for this validation");
         }
-        event.getPayload().getProducts().forEach(product -> {
+        event.getPayload().getOrderItems().forEach(product -> {
             validateProductInformed(product);
             validateExistingProduct(product.getProduct().getCode());
         });
     }
 
-    private void validateProductInformed(OrderProducts product) {
+    private void validateProductInformed(OrderItem product) {
         if (isEmpty(product.getProduct()) || isEmpty(product.getProduct().getCode())) {
             throw new ValidationException("Product must be informed");
         }
@@ -101,7 +101,7 @@ public class ProductValidationService {
     private void createValidation(Event event, boolean success) {
         var validation = Validation.builder()
             .orderId(event.getPayload().getId())
-            .transactionId(event.getTransactionalId())
+            .transactionId(event.getTransactionId())
             .success(success)
             .build();
         validationRepository.save(validation);

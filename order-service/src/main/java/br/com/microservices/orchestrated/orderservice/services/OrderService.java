@@ -35,9 +35,9 @@ public class OrderService {
 
     private Order getOrderFromBuilder(OrderRequest orderRequest) {
         return Order.builder()
-            .products(orderRequest.getProducts())
+            .orderItems(orderRequest.getOrderItems())
             .createdAt(LocalDateTime.now())
-            .transactionalId(
+            .transactionId(
                 String.format(TRANSACTION_ID_PATTERN, Instant.now().toEpochMilli(), UUID.randomUUID())
             )
             .build();
@@ -52,7 +52,7 @@ public class OrderService {
         return Event.builder()
             .orderId(order.getId())
             .payload(order)
-            .transactionalId(order.getTransactionalId())
+            .transactionId(order.getTransactionId())
             .createdAt(LocalDateTime.now())
             .build();
     }

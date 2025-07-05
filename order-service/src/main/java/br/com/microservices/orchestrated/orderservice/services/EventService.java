@@ -23,7 +23,7 @@ public class EventService {
         event.setOrderId(event.getOrderId());
         event.setCreatedAt(LocalDateTime.now());
         save(event);
-        log.info("Order {} with saga notified! TransactionId: {}", event.getOrderId(), event.getTransactionalId());
+        log.info("Order {} with saga notified! TransactionId: {}", event.getOrderId(), event.getTransactionId());
     }
 
     public Event save(Event event) {
@@ -40,12 +40,12 @@ public class EventService {
             return eventRepository.findTop1ByOrderIdOrderByCreatedAtDesc(filter.getOrderId())
                 .orElseThrow(() -> new ValidationException("Event not found by order ID " + filter.getOrderId()));
         }
-        return eventRepository.findTop1ByTransactionalIdOrderByCreatedAtDesc(filter.getTransactionalId())
-            .orElseThrow(() -> new ValidationException("Event not found by transactional ID " + filter.getTransactionalId()));
+        return eventRepository.findTop1ByTransactionIdOrderByCreatedAtDesc(filter.getTransactionId())
+            .orElseThrow(() -> new ValidationException("Event not found by transactional ID " + filter.getTransactionId()));
     }
 
     private void validateEvent(EventFilters filter) {
-        if (Objects.isNull(filter) || ((Objects.isNull(filter.getTransactionalId()) || filter.getTransactionalId().isEmpty())
+        if (Objects.isNull(filter) || ((Objects.isNull(filter.getTransactionId()) || filter.getTransactionId().isEmpty())
             && (Objects.isNull(filter.getOrderId()) || filter.getOrderId().isEmpty()))) {
             throw new ValidationException("Order ID or Transaction ID must be informed");
         }

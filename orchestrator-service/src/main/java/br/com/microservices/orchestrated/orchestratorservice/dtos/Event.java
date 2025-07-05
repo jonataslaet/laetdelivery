@@ -17,7 +17,7 @@ public class Event {
 
     @EqualsAndHashCode.Include
     private String id;
-    private String transactionalId;
+    private String transactionId;
     private String orderId;
     private Order payload;
     private EventSourceEnum source;

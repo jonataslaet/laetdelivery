@@ -2,7 +2,6 @@ package br.com.microservices.orchestrated.orderservice.documents;
 
 import lombok.*;
 import nonapi.io.github.classgraph.json.Id;
-import org.springframework.aop.scope.ScopedObject;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -23,10 +22,10 @@ public class Order {
     private String id;
 
     @Builder.Default
-    private List<OrderProducts> products = new ArrayList<>();
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     private LocalDateTime createdAt;
-    private String transactionalId;
+    private String transactionId;
     private Double totalAmount;
     private Integer itemsTotalQuantity;
 }

@@ -1,4 +1,4 @@
-package br.com.microservices.orchestrated.inventoryservice.dtos;
+package br.com.microservices.orchestrated.paymentservice.dtos;
 
 import lombok.*;
 
@@ -7,7 +7,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderProducts {
+public class OrderItem {
 
     private Product product;
     private Integer quantity;

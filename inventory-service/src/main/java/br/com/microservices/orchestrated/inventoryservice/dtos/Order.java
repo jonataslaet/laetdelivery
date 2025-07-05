@@ -15,9 +15,9 @@ public class Order {
 
     @EqualsAndHashCode.Include
     private String id;
-    private List<OrderProducts> products;
+    private List<OrderItem> orderItems;
     private LocalDateTime createdAt;
-    private String transactionalId;
+    private String transactionId;
     private Double totalAmount;
     private Integer itemsTotalQuantity;
 }
